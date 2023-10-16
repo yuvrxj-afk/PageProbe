@@ -16,7 +16,7 @@ export default function Home() {
        overflow-hidden rounded-full border border-gray-200 bg-white 
        px-8 py-4 shadow-md backdrop-blur transition-all hover:bg-stone-600 hover:text-white hover:border-gray-300 "
         >
-          <p className="text-sm font-bold ">PageProbe is here.</p>
+          <p className="text-sm font-bold ">PageProbe is up now.</p>
         </div>
         <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
           <span className="text-blue-600 font-extrabold">Docs? </span>
@@ -26,7 +26,7 @@ export default function Home() {
           <span className="text-blue-600 font-extrabold"> Dialouges !</span>
         </h1>
         <p className="mt-5 max-w-prose text-zinc-600 sm:text-lg ">
-          Experience PageProbe: Effortlessly Engage in Conversations with PDF
+          Effortlessly Engage in Conversations with PDF
           Documents. Begin by Uploading Your File and Instantly Chatting with
           <span className="text-zinc-800 font-bold "> Martin </span>
           the bot.
@@ -179,8 +179,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-
       </div>
+      
     </>
   );
 }
