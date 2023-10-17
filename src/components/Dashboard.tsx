@@ -2,16 +2,32 @@
 
 import { trpc } from "@/app/_trpc/client";
 import UploadButton from "./UploadButton";
-import { File, Ghost, MessageSquare, Plus, Trash } from "lucide-react";
+import { File, Ghost, Loader, MessageSquare, Plus, Trash } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [currentDeleteFile, setCurrentDeleteFile] = useState<string | null>(
+    null
+  );
+  const utils = trpc.useContext();
+
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
 
-  const { mutate: deleteFile } = trpc.deleteFile.useMutation();
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    onSuccess: () => {
+      utils.getUserFiles.invalidate();
+    },
+    onMutate({ id }) {
+      setCurrentDeleteFile(id);
+    },
+    onSettled() {
+      setCurrentDeleteFile(null);
+    },
+  });
   return (
     <main className="mx-auto max-w-7xl md:p-10 ">
       <div className="mt-8 flex flex-row items-start justify-between gap-4 border-b-2 border-gray-500 pb-3 px-2 sm:items-center sm:gap-0 ">
@@ -21,7 +37,7 @@ const Dashboard = () => {
 
       {/* Display All files */}
       {files && files?.length !== 0 ? (
-        <ul className="mt-8 grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
           {files
             .sort(
               (a, b) =>
@@ -31,7 +47,7 @@ const Dashboard = () => {
             .map((file) => (
               <li
                 key={file.id}
-                className="col-span-1 divide-y mx-4  divide-gray-200 rounded-lg bg-white shadow-lg shadow-gray-300 transition hover:shadow-lg"
+                className="col-span-1 divide-y m-4  divide-gray-200 rounded-lg bg-white shadow-lg shadow-gray-500 transition hover:shadow-lg"
               >
                 <Link
                   href={`/dashboard/${file.id}`}
@@ -69,7 +85,11 @@ const Dashboard = () => {
                       deleteFile({ id: file.id });
                     }}
                   >
-                    <Trash className="h-4 w-4" />
+                    {currentDeleteFile === file.id ? (
+                      <Loader className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Trash className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </li>
