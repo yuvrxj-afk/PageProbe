@@ -19,7 +19,7 @@ const page = async () => {
     redirect("/auth-callback?origin=dashboard");
   }
 
-  return <Dashboard email={user.email} />;
+  return <Dashboard />;
 };
 
 export default page;
