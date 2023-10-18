@@ -22,7 +22,7 @@ const Dashboard = () => {
       utils.getUserFiles.invalidate();
     },
     onMutate({ id }) {
-      setCurrentDeleteFile(id);
+      setCurrentDeleteFile(id); 
     },
     onSettled() {
       setCurrentDeleteFile(null);
