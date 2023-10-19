@@ -5,6 +5,8 @@ import { db } from "@/db";
 import { z } from "zod";
 
 export const appRouter = router({
+  
+  // auth callback procedure
   authCallback: publicProcedure.query(async () => {
     const { getUser } = getKindeServerSession();
     const user = getUser();
@@ -30,6 +32,8 @@ export const appRouter = router({
 
     return { success: true };
   }),
+  
+  // get files for the user procedure
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
     return await db.file.findMany({
@@ -38,6 +42,25 @@ export const appRouter = router({
       },
     });
   }),
+
+  // getFile / individual
+  getFile: privateProcedure
+    .input(z.object({ key: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      const file = await db.file.findFirst({
+        where: {
+          key: input.key,
+          userId,
+        },
+      });
+      if (!file) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+      return file;
+    }),
+
+    // delete file
   deleteFile: privateProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
