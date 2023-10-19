@@ -47,7 +47,7 @@ const Dashboard = () => {
             .map((file) => (
               <li
                 key={file.id}
-                className="col-span-1 divide-y m-4  divide-gray-200 rounded-lg bg-white shadow-lg shadow-gray-500 transition hover:shadow-lg"
+                className="col-span-1 divide-y mt-3 mx-3 divide-gray-200 rounded-lg bg-white shadow-sm shadow-black transition hover:shadow-xl hover:shadow-gray-400"
               >
                 <Link
                   href={`/dashboard/${file.id}`}

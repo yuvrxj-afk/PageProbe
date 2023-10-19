@@ -6,10 +6,25 @@ import { Button } from "./ui/button";
 import Dropzone from "react-dropzone";
 import { File, UploadCloud } from "lucide-react";
 import { Progress } from "./ui/progress";
+import { useUploadThing } from "@/lib/uploadthing";
+import { useToast } from "./ui/use-toast";
+import { trpc } from "@/app/_trpc/client";
+import { useRouter } from "next/navigation";
 
 const UploadDropzone = () => {
+  const router = useRouter();
+
   const [isUploading, setIsUploading] = useState(true);
   const [uploadProgress, setUploadProgress] = useState(0);
+
+  const { startUpload } = useUploadThing("pdfUploader");
+  const { toast } = useToast();
+
+  const {} = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+  });
 
   const startProgress = () => {
     setUploadProgress(0);
@@ -34,6 +49,26 @@ const UploadDropzone = () => {
         const progInterval = startProgress();
 
         await new Promise((resolve) => setTimeout(resolve, 2500));
+
+        const res = await startUpload(acc);
+        if (!res) {
+          return toast({
+            title: "Something went wrong.",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
+
+        const [fileResponse] = res;
+        const key = fileResponse?.key;
+
+        if (!key) {
+          return toast({
+            title: "Something went wrong.",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
 
         clearInterval(progInterval);
         setUploadProgress(100);
