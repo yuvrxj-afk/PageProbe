@@ -72,7 +72,7 @@ const PdfRenderer = ({ url }: pdfRendererProps) => {
 
   return (
     <div className="bg-white rounded-md w-full border-2 items-center shadow flex flex-col ">
-      <div className="h-11 w-full border-b border-zinc-500 flex items-center justify-between px-2 mb-2">
+      <div className="h-11 w-full border-b bg-black font-bold text-white border-zinc-500 flex items-center justify-between px-2 mb-2">
         <div className="flex items-center gap-1.5">
           <Button
             variant="ghost"
@@ -89,7 +89,7 @@ const PdfRenderer = ({ url }: pdfRendererProps) => {
           <div className="flex items-center gap-1.5">
             <Input
               className={cn(
-                `w-12 h-8`,
+                `w-12 h-8 text-black`,
                 errors.page && " focus-visible:ring-red-500"
               )}
               {...register("page")}
@@ -99,7 +99,7 @@ const PdfRenderer = ({ url }: pdfRendererProps) => {
                 }
               }}
             />
-            <p className="text-zinc-700 text-sm space-x-1">
+            <p className="text-white text-sm space-x-1">
               <span>/</span>
               <span>{numPages ?? ""}</span>
             </p>

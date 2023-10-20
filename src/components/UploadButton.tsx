@@ -50,7 +50,7 @@ const UploadDropzone = () => {
 
         const progInterval = startProgress();
 
-        await new Promise((resolve) => setTimeout(resolve, 2500));
+        await new Promise((resolve) => setTimeout(resolve, 1500));
 
         const res = await startUpload(acc);
         if (!res) {
