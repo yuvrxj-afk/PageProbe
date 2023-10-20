@@ -14,8 +14,8 @@ const NavBar = () => {
             <Image
               src="/PageProbe-logo.png"
               alt="logo"
-              width={180}
-              height={90}
+              width={100}
+              height={80}
               className="drop-shadow-sm"
             />
           </Link>
