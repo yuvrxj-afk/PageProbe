@@ -60,6 +60,16 @@ export const appRouter = router({
       return file;
     }),
 
+// getFileUpload Status
+getFileUploadStatus:privateProcedure.input(z.object({fileId: z.string()})).mutation(async({input,ctx})=>{
+  const file = await db.file.findFirst({
+    where:{
+      id:input.fileId,
+      userId:ctx.userId
+    }
+  })
+}),
+
     // delete file
   deleteFile: privateProcedure
     .input(z.object({ id: z.string() }))
