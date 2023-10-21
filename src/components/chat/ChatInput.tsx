@@ -1,10 +1,9 @@
-
-const ChatInput = () => {
-  return (
-    <div>
-      chat
-    </div>
-  )
+interface ChatInputProps {
+  isDisabled?: boolean;
 }
 
-export default ChatInput
+const ChatInput = ({ isDisabled }: ChatInputProps) => {
+  return <div>chat</div>;
+};
+
+export default ChatInput;
