@@ -21,13 +21,25 @@ export const POST = async (req: NextRequest) => {
   const { fileId, message } = SendMessageValidator.parse(body);
 
   const file = await db.file.findFirst({
-    where:{
-        id:fileId,
-        userId
-    }
-  })
+    where: {
+      id: fileId,
+      userId,
+    },
+  });
 
-  if(!file){
-    return new Response('Not Found')
+  if (!file) {
+    return new Response("Not Found", { status: 404 });
   }
+
+  await db.message.create({
+    data: {
+      text: message,
+      isUserMessage: true,
+      userId,
+      fileId,
+    },
+  });
+
+//   
+
 };
