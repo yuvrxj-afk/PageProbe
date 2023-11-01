@@ -5,7 +5,6 @@ import { db } from "@/db";
 import { z } from "zod";
 
 export const appRouter = router({
-  
   // auth callback procedure
   authCallback: publicProcedure.query(async () => {
     const { getUser } = getKindeServerSession();
@@ -32,7 +31,7 @@ export const appRouter = router({
 
     return { success: true };
   }),
-  
+
   // get files for the user procedure
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
@@ -60,7 +59,23 @@ export const appRouter = router({
       return file;
     }),
 
-    // delete file
+  // getFileUpload Status
+  getFileUploadStatus: privateProcedure
+    .input(z.object({ fileId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const file = await db.file.findFirst({
+        where: {
+          id: input.fileId,
+          userId: ctx.userId,
+        },
+      });
+      if (!file) {
+        return { status: "PENDING" as const };
+      }
+      return { status: file.uploadStatus };
+    }),
+
+  // delete file
   deleteFile: privateProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {

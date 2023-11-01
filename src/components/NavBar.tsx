@@ -10,14 +10,15 @@ const NavBar = () => {
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-          <Link href="/" className="font-semibold text-lg flex z-40">
-            <Image
+          <Link href="/" className="font-bold text-xl flex z-40">
+            {/* <Image
               src="/PageProbe-logo.png"
               alt="logo"
               width={100}
               height={80}
               className="drop-shadow-sm"
-            />
+            /> */}
+            PageProbe.
           </Link>
 
           {/* todo : add mobile navBar */}
