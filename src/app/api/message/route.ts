@@ -80,6 +80,7 @@ export const POST = async (req: NextRequest) => {
     model: "gpt-3.5-turbo",
     temperature: 0,
     stream: true,
+    // max_tokens: 3500,
     messages: [
       {
         role: "system",
@@ -107,4 +108,19 @@ export const POST = async (req: NextRequest) => {
       },
     ],
   });
+
+  const stream = OpenAIStream(response, {
+    async onCompletion(completion) {
+      await db.message.create({
+        data: {
+          text: completion,
+          isUserMessage: false,
+          fileId,
+          userId,
+        },
+      });
+    },
+  });
+
+  return new StreamingTextResponse(stream);
 };
