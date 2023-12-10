@@ -52,6 +52,7 @@ export const appRouter = router({
       })
     )
     .query(async ({ ctx, input }) => {
+      // console.log("gfm")
       const { userId } = ctx;
       const { fileId, cursor } = input;
       const limit = input.limit ?? INFINITE_QUERY_LIMIT;

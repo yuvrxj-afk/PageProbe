@@ -12,9 +12,10 @@ export default function Home() {
      sm:mt-40 flex flex-col items-center justify-center text-center"
       >
         <div
-          className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2
+          className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2
        overflow-hidden rounded-full border border-gray-200 bg-white 
-       px-8 py-4 shadow-md backdrop-blur transition-all hover:bg-stone-600 hover:text-white hover:border-gray-300 "
+       px-7 py-2 shadow-md backdrop-blur transition-all hover:bg-stone-600
+        hover:text-white hover:border-gray-300 "
         >
           <p className="text-sm font-bold ">PageProbe is up now.</p>
         </div>
@@ -26,8 +27,8 @@ export default function Home() {
           <span className="text-blue-600 font-extrabold"> Dialouges !</span>
         </h1>
         <p className="mt-5 max-w-prose text-zinc-600 sm:text-lg ">
-          Effortlessly Engage in Conversations with PDF
-          Documents. Begin by Uploading Your File and Instantly Chatting with
+          Effortlessly Engage in Conversations with PDF Documents. Begin by
+          Uploading Your File and Instantly Chatting with
           <span className="text-zinc-800 font-bold "> Martin </span>
           the bot.
         </p>
@@ -180,7 +181,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
     </>
   );
 }

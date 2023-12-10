@@ -26,12 +26,16 @@ export const POST = async (req: NextRequest) => {
 
   const { fileId, message } = SendMessageValidator.parse(body);
 
+  // console.log("this is fileId : ", fileId);
+  // console.log("this is message: ", message);
+
   const file = await db.file.findFirst({
     where: {
       id: fileId,
       userId,
     },
   });
+  // console.log("this is file: ", file);
 
   if (!file) {
     return new Response("Not Found", { status: 404 });
@@ -70,7 +74,6 @@ export const POST = async (req: NextRequest) => {
     },
     take: 6,
   });
-
   const formattedPrevMessages = prevMessage.map((msg) => ({
     role: msg.isUserMessage ? ("user" as const) : ("martin" as const),
     content: msg.text,
@@ -108,6 +111,11 @@ export const POST = async (req: NextRequest) => {
       },
     ],
   });
+
+
+  // console.log("this is fpm: ", formattedPrevMessages);
+  // console.log("this is response: ", response.tee.length);
+
 
   const stream = OpenAIStream(response, {
     async onCompletion(completion) {

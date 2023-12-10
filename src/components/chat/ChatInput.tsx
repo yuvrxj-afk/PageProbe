@@ -38,7 +38,7 @@ const ChatInput = ({ isDisabled }: ChatInputProps) => {
               />
               <Button
                 disabled={isLoading || isDisabled}
-                type="submit"
+                // type="submit"
                 onClick={() => {
                   addMessage();
                   textAreaRef.current?.focus();
