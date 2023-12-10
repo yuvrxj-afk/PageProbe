@@ -71,8 +71,8 @@ const PdfRenderer = ({ url }: pdfRendererProps) => {
   };
 
   return (
-    <div className="bg-white rounded-md w-full border-2 items-center shadow flex flex-col ">
-      <div className="h-11 w-full border-b bg-black font-bold text-white border-zinc-500 flex items-center justify-between px-2 mb-2">
+    <div className="bg-white rounded-md w-full items-center shadow flex flex-col ">
+      <div className="h-14 w-full border-b bg-black font-bold text-white border-zinc-500 flex items-center justify-between px-2 mb-2">
         <div className="flex items-center gap-1.5">
           <Button
             variant="ghost"
