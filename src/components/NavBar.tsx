@@ -57,16 +57,6 @@ const NavBar = () => {
               </>
             ) : (
               <>
-                <Link
-                  href="/dashboard"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    size: "sm",
-                  })}
-                >
-                  dashboard
-                </Link>
-
                 <UserAccountNav
                   name={
                     !user.given_name || !user.family_name
