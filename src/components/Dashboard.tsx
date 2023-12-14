@@ -8,8 +8,13 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { getUserSubscriptionPlan } from "@/lib/stripe";
 
-const Dashboard = () => {
+interface PageProps {
+  subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>;
+}
+
+const Dashboard = ({ subscriptionPlan }: PageProps) => {
   const [currentDeleteFile, setCurrentDeleteFile] = useState<string | null>(
     null
   );
@@ -32,7 +37,7 @@ const Dashboard = () => {
     <main className="mx-auto max-w-7xl md:p-10 ">
       <div className="mt-8 flex flex-col p-4 items-start justify-between gap-4 border-b-2 border-gray-500 pb-5 sm:flex-row sm:items-center sm:gap-0 ">
         <h1 className="text-5xl mb-3 font-bold text-gray-900">My Files</h1>
-        <UploadButton />
+        <UploadButton isSubscribed={subscriptionPlan.isSubscribed} />
       </div>
 
       {/* Display All files */}
