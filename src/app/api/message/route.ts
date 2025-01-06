@@ -26,16 +26,12 @@ export const POST = async (req: NextRequest) => {
 
   const { fileId, message } = SendMessageValidator.parse(body);
 
-  // console.log("this is fileId : ", fileId);
-  // console.log("this is message: ", message);
-
   const file = await db.file.findFirst({
     where: {
       id: fileId,
       userId,
     },
   });
-  // console.log("this is file: ", file);
 
   if (!file) {
     return new Response("Not Found", { status: 404 });

@@ -82,6 +82,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
       onError={() => {
         redirect("/dashboard");
       }}
+      
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
